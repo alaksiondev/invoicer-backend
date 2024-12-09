@@ -6,7 +6,6 @@ import repository.api.repository.RefreshTokenRepository
 import services.api.services.login.RefreshLoginService
 import services.api.services.login.StoreRefreshTokenService
 import services.api.services.user.GetUserByIdService
-import utils.exceptions.unauthorizedError
 import utils.exceptions.unauthorizedResourceError
 
 internal class RefreshLoginServiceImpl(
