@@ -1,0 +1,72 @@
+name: Gradle Kover Coverage Report
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  kover-report:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Run Kover XML Report for server module
+      run: ./gradlew :server:koverXmlReport
+
+    - name: Parse coverage XML
+      id: coverage
+      run: |
+        COVERAGE=$(grep -oPm1 "(?<=<counter type=\"INSTRUCTION\" missed=\")[^\"]+" server/build/reports/kover/report.xml)
+        COVERED=$(grep -oPm1 "(?<=covered=\")[^\"]+" server/build/reports/kover/report.xml)
+        TOTAL=$((COVERAGE + COVERED))
+        COVERAGE_PERCENTAGE=$((COVERED * 100 / TOTAL))
+        echo "coverage=$COVERAGE_PERCENTAGE%" >> $GITHUB_ENV
+
+    - name: Install GitHub CLI
+      run: sudo apt-get install gh
+
+    - name: Check for existing coverage comment
+      id: coverage-comment
+      run: |
+        gh pr view ${{ github.event.pull_request.number }} --json comments --jq '.comments[] | select(.body | contains("Coverage Report")) | .id' > comment_id.txt
+        if [ -s comment_id.txt ]; then
+          echo "comment_id=$(cat comment_id.txt)" >> $GITHUB_ENV
+        fi
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Post or update coverage comment
+      run: |
+        COMMENT_BODY="### Coverage Report\n\nCurrent coverage is $COVERAGE_PERCENTAGE%."
+        if [ -n "${{ env.comment_id }}" ]; then
+          gh pr comment ${{ env.comment_id }} --body "$COMMENT_BODY"
+        else
+          gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT_BODY"
+        fi
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
