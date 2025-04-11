@@ -1,6 +1,5 @@
 package services.impl.intermediary
 
-import utils.exceptions.http.HttpCode
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import models.getinvoices.InvoiceListItemModel
@@ -8,6 +7,7 @@ import repository.api.fakes.FakeIntermediaryRepository
 import repository.api.fakes.FakeInvoiceRepository
 import services.fakes.intermediary.FakeGetIntermediaryByIdService
 import services.fakes.user.FakeGetUserByIdService
+import utils.exceptions.http.HttpCode
 import utils.exceptions.http.HttpError
 import java.util.*
 import kotlin.test.BeforeTest
@@ -42,8 +42,8 @@ class DeleteIntermediaryImplTest {
         invoiceRepository.getInvoicesByIntermediaryIdResponse = { listOf() }
 
         service.execute(
-            beneficiaryId = "988b016b-41a9-487f-b280-283faff1d1d1",
-            userId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"
+            beneficiaryId = UUID.fromString("988b016b-41a9-487f-b280-283faff1d1d1"),
+            userId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36")
         )
 
         assertEquals(
@@ -72,8 +72,8 @@ class DeleteIntermediaryImplTest {
             }
 
             service.execute(
-                beneficiaryId = "988b016b-41a9-487f-b280-283faff1d1d1",
-                userId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"
+                beneficiaryId = UUID.fromString("988b016b-41a9-487f-b280-283faff1d1d1"),
+                userId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36")
             )
         }
 

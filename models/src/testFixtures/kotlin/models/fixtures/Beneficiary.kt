@@ -2,6 +2,7 @@ package models.fixtures
 
 import kotlinx.datetime.Instant
 import models.beneficiary.*
+import java.util.*
 
 val beneficiaryModelFixture: BeneficiaryModel = BeneficiaryModel(
     name = "John Doe",
@@ -9,8 +10,8 @@ val beneficiaryModelFixture: BeneficiaryModel = BeneficiaryModel(
     swift = "DEUTDEDBFRA",
     bankName = "Deutsche Bank",
     bankAddress = "Taunusanlage 12, 60325 Frankfurt am Main, Germany",
-    userId = "user-123",
-    id = "beneficiary-123",
+    userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"),
+    id = UUID.fromString("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
     createdAt = Instant.parse("2000-06-19T00:00:00Z"),
     updatedAt = Instant.parse("2000-06-19T00:00:00Z"),
 )
@@ -47,8 +48,8 @@ val userBeneficiariesFixture: UserBeneficiaries = UserBeneficiaries(
             swift = "DEUTDEDBFRA",
             bankName = "Deutsche Bank",
             bankAddress = "Taunusanlage 12, 60325 Frankfurt am Main, Germany",
-            userId = "user-123",
-            id = "beneficiary-123",
+            userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"),
+            id = UUID.fromString("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
             createdAt = Instant.parse("2000-06-19T00:00:00Z"),
             updatedAt = Instant.parse("2000-06-19T00:00:00Z"),
         ),

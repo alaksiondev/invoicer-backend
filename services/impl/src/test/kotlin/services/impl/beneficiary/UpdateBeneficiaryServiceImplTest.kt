@@ -12,6 +12,7 @@ import services.fakes.beneficiary.FakeCheckBeneficiarySwiftAvailableService
 import services.fakes.beneficiary.FakeGetBeneficiaryByIdService
 import services.fakes.user.FakeGetUserByIdService
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -208,7 +209,7 @@ class UpdateBeneficiaryServiceImplTest {
 
     @Test
     fun `should ignore swift check if it did not change`() = runTest {
-        val beneficiaryId = "aae887c0-732e-42d8-ac79-0d1953a7d3ec"
+        val beneficiaryId = UUID.fromString("aae887c0-732e-42d8-ac79-0d1953a7d3ec")
         mockIdCodes(
             ibanValid = true,
             swiftValid = true
@@ -253,8 +254,8 @@ class UpdateBeneficiaryServiceImplTest {
             bankAddress = "Bank Address"
         )
 
-        val BENEFICIARY_ID = "aae887c0-732e-42d8-ac79-0d1953a7d3ec"
-        val USER_ID = "56de1427-e841-47f5-a14d-d0b9503b5a29"
+        val BENEFICIARY_ID = UUID.fromString("aae887c0-732e-42d8-ac79-0d1953a7d3ec")
+        val USER_ID = UUID.fromString("56de1427-e841-47f5-a14d-d0b9503b5a29")
     }
 
 }

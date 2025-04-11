@@ -43,19 +43,19 @@ val invoiceModelFixture = InvoiceModel(
         swift = "DEUTDEDBFRA",
         bankName = "Deutsche Bank",
         bankAddress = "Taunusanlage 12, 60325 Frankfurt am Main, Germany",
-        userId = "user-123",
-        id = "746ed8ef-f40f-430b-887e-d6b939c51e9e",
+        userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"),
+        id = UUID.fromString("746ed8ef-f40f-430b-887e-d6b939c51e9e"),
         createdAt = Instant.parse("2000-06-19T00:00:00Z"),
         updatedAt = Instant.parse("2000-06-19T00:00:00Z")
     ),
     intermediary = IntermediaryModel(
-        id = "c1351982-7c81-4036-a96a-6b93f6931cc9",
+        id = UUID.fromString("c1351982-7c81-4036-a96a-6b93f6931cc9"),
         name = "Intermediary Ltd.",
         iban = "DE89370400440532013000",
         swift = "DEUTDEDBFRA",
         bankName = "Deutsche Bank",
         bankAddress = "Taunusanlage 12, 60325 Frankfurt am Main, Germany",
-        userId = "user-456",
+        userId = UUID.fromString("b23899e4-63b5-42a9-9016-4647d9ec2936"),
         createdAt = Instant.parse("2023-01-01T00:00:00Z"),
         updatedAt = Instant.parse("2023-01-01T00:00:00Z")
     )

@@ -1,15 +1,16 @@
 package services.impl.intermediary
 
-import utils.exceptions.http.HttpCode
+import io.github.alaksion.invoicer.utils.fakes.FakeIbanValidator
+import io.github.alaksion.invoicer.utils.fakes.FakeSwiftValidator
 import kotlinx.coroutines.test.runTest
 import models.intermediary.CreateIntermediaryModel
 import repository.api.fakes.FakeIntermediaryRepository
 import repository.api.fakes.FakeUserRepository
-import io.github.alaksion.invoicer.utils.fakes.FakeIbanValidator
-import io.github.alaksion.invoicer.utils.fakes.FakeSwiftValidator
 import services.fakes.intermediary.FakeCheckIntermediarySwiftAvailableService
 import services.fakes.user.FakeGetUserByIdService
+import utils.exceptions.http.HttpCode
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -160,7 +161,7 @@ class CreateIntermediaryServiceImplTest {
     }
 
     companion object {
-        val userId = "7956749e-9d8b-4ab7-abd1-29f0b7ecb9b8"
+        val userId = UUID.fromString("7956749e-9d8b-4ab7-abd1-29f0b7ecb9b8")
 
         val INPUT = CreateIntermediaryModel(
             name = "Sample name",

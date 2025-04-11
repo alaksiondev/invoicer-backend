@@ -1,7 +1,8 @@
 package datasource.api.database
 
-import models.qrcodetoken.QrCodeTokenModel
 import models.fixtures.qrCodeTokenModelFixture
+import models.qrcodetoken.QrCodeTokenModel
+import java.util.*
 
 class FakeQrCodeTokenDatabaseSource : QrCodeTokenDatabaseSource {
 
@@ -24,15 +25,15 @@ class FakeQrCodeTokenDatabaseSource : QrCodeTokenDatabaseSource {
         return getQrCodeTokenByContentIdResponse()
     }
 
-    override suspend fun getQrCodeTokenByUUID(id: String): QrCodeTokenModel? {
+    override suspend fun getQrCodeTokenByUUID(tokenId: UUID): QrCodeTokenModel? {
         return getQrCodeTokenByUUIDResponse()
     }
 
-    override suspend fun consumeQrCodeToken(tokenId: String): QrCodeTokenModel? {
+    override suspend fun consumeQrCodeToken(tokenId: UUID): QrCodeTokenModel? {
         return consumeQrCodeTokenResponse()
     }
 
-    override suspend fun expireQrCodeToken(tokenId: String) {
+    override suspend fun expireQrCodeToken(tokenId: UUID) {
         return expireQrCodeTokenResponse()
     }
 }

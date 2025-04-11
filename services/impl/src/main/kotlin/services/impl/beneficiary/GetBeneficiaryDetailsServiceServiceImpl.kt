@@ -27,7 +27,7 @@ internal class GetBeneficiaryDetailsServiceServiceImpl(
             notFoundError("Beneficiary not found")
         }
 
-        if (beneficiary.userId != user.id.toString()) {
+        if (beneficiary.userId != user.id) {
             unauthorizedResourceError()
         }
 

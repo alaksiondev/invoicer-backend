@@ -1,7 +1,7 @@
 package services.impl.invoice
 
+import io.github.alaksion.invoicer.messaging.fakes.FakeMessageProducer
 import io.github.alaksion.invoicer.utils.fakes.FakeClock
-import utils.exceptions.http.HttpCode
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import models.InvoiceModel
@@ -16,6 +16,7 @@ import repository.api.fakes.FakeInvoiceRepository
 import services.fakes.beneficiary.FakeGetBeneficiaryByIdService
 import services.fakes.intermediary.FakeGetIntermediaryByIdService
 import services.fakes.user.FakeGetUserByIdService
+import utils.exceptions.http.HttpCode
 import utils.exceptions.http.HttpError
 import java.util.*
 import kotlin.test.assertEquals
@@ -30,6 +31,7 @@ class CreateInvoiceServiceImplTest {
     private lateinit var getUserByIdService: FakeGetUserByIdService
     private lateinit var getBeneficiaryByIdService: FakeGetBeneficiaryByIdService
     private lateinit var getIntermediaryByIdService: FakeGetIntermediaryByIdService
+    private lateinit var messageProducer: FakeMessageProducer
 
     @Before
     fun setUp() {
@@ -38,14 +40,15 @@ class CreateInvoiceServiceImplTest {
         getUserByIdService = FakeGetUserByIdService()
         getBeneficiaryByIdService = FakeGetBeneficiaryByIdService()
         getIntermediaryByIdService = FakeGetIntermediaryByIdService()
+        messageProducer = FakeMessageProducer()
 
         service = CreateInvoiceServiceImpl(
             invoiceRepository = invoiceRepository,
             clock = clock,
             getUserByIdService = getUserByIdService,
             getBeneficiaryByIdService = getBeneficiaryByIdService,
-            getIntermediaryByIdService = getIntermediaryByIdService
-
+            getIntermediaryByIdService = getIntermediaryByIdService,
+            messageProducer = messageProducer
         )
     }
 
@@ -60,7 +63,7 @@ class CreateInvoiceServiceImplTest {
                 BASE_INPUT.copy(
                     issueDate = today.minus(1.days)
                 ),
-                userId = "fed3e1ac-c755-4048-9315-356054c4da11"
+                userId = UUID.fromString("fed3e1ac-c755-4048-9315-356054c4da11")
             )
         }
 
@@ -81,7 +84,7 @@ class CreateInvoiceServiceImplTest {
                 BASE_INPUT.copy(
                     dueDate = today.minus(1.days)
                 ),
-                userId = "fed3e1ac-c755-4048-9315-356054c4da11"
+                userId = UUID.fromString("fed3e1ac-c755-4048-9315-356054c4da11")
             )
         }
 
@@ -101,7 +104,7 @@ class CreateInvoiceServiceImplTest {
                     dueDate = today,
                     issueDate = today.plus(1.days)
                 ),
-                userId = "fed3e1ac-c755-4048-9315-356054c4da11"
+                userId = UUID.fromString("fed3e1ac-c755-4048-9315-356054c4da11")
             )
         }
 
@@ -120,8 +123,8 @@ class CreateInvoiceServiceImplTest {
             recipientCompanyAddress = "Recipient Company Address",
             issueDate = Instant.parse("2000-06-19T00:00:00Z"),
             dueDate = Instant.parse("2000-06-19T00:00:00Z"),
-            beneficiaryId = "b2db44e1-af93-48cf-94fe-7484fd8045ef",
-            intermediaryId = "02cac010-bc14-4192-872f-103f27afa1ed",
+            beneficiaryId = UUID.fromString("b2db44e1-af93-48cf-94fe-7484fd8045ef"),
+            intermediaryId = UUID.fromString("02cac010-bc14-4192-872f-103f27afa1ed"),
             activities = listOf(
                 CreateInvoiceActivityModel(
                     description = "Description",
@@ -146,8 +149,8 @@ class CreateInvoiceServiceImplTest {
                 swift = "swift",
                 bankName = "bank name",
                 bankAddress = "bank address",
-                userId = "fed3e1ac-c755-4048-9315-356054c4da11",
-                id = "b2db44e1-af93-48cf-94fe-7484fd8045ef",
+                userId = UUID.fromString("fed3e1ac-c755-4048-9315-356054c4da11"),
+                id = UUID.fromString("b2db44e1-af93-48cf-94fe-7484fd8045ef"),
                 createdAt = Instant.parse("2000-06-19T00:00:00Z"),
                 updatedAt = Instant.parse("2000-06-19T00:00:00Z"),
             ),

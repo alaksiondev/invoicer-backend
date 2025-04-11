@@ -1,8 +1,8 @@
 package io.github.alaksion.invoicer.server.app
 
-import connectDatabase
 import controller.rootController
 import io.github.alaksion.invoicer.consumers.InvoicerMessageConsumer
+import io.github.alaksion.invoicer.server.app.database.connectDatabase
 import io.github.alaksion.invoicer.server.app.plugins.*
 import io.ktor.server.application.*
 import kotlinx.coroutines.launch

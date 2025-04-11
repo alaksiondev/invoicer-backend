@@ -3,9 +3,10 @@ package models.fixtures
 import kotlinx.datetime.Instant
 import models.qrcodetoken.QrCodeTokenModel
 import models.qrcodetoken.QrCodeTokenStatusModel
+import java.util.*
 
 val qrCodeTokenModelFixture = QrCodeTokenModel(
-    id = "a6200473-d471-4c62-8c55-aa714adab00c",
+    id = UUID.fromString("a6200473-d471-4c62-8c55-aa714adab00c"),
     agent = "Mozilla/5.0",
     base64Content = "dGVzdCBjb250ZW50",
     ipAddress = "192.168.1.1",

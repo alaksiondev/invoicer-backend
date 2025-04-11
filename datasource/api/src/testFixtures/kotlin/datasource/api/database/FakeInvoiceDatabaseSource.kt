@@ -32,7 +32,7 @@ class FakeInvoiceDatabaseSource : InvoiceDatabaseSource {
         return getInvoiceByExternalIdResponse()
     }
 
-    override suspend fun getInvoices(filters: GetInvoicesFilterData, page: Long, limit: Int, userId: String): InvoiceListModel {
+    override suspend fun getInvoices(filters: GetInvoicesFilterData, page: Long, limit: Int, userId: UUID): InvoiceListModel {
         return getInvoicesResponse()
     }
 

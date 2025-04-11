@@ -9,6 +9,7 @@ import repository.api.fakes.FakeRefreshTokenRepository
 import services.fakes.refreshtoken.FakeStoreRefreshTokenService
 import services.fakes.user.FakeGetUserByIdService
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -95,7 +96,7 @@ internal class RefreshLoginServiceImplTest {
         val (userId, token) = refreshTokenRepository.invalidateCallStack.first()
 
         assertEquals(
-            expected = FakeGetUserByIdService.DEFAULT_RESPONSE.id.toString(),
+            expected = FakeGetUserByIdService.DEFAULT_RESPONSE.id,
             actual = userId
         )
 
@@ -121,7 +122,7 @@ internal class RefreshLoginServiceImplTest {
         )
 
         assertEquals(
-            expected = FakeGetUserByIdService.DEFAULT_RESPONSE.id.toString(),
+            expected = FakeGetUserByIdService.DEFAULT_RESPONSE.id,
             actual = userId
         )
     }
@@ -148,7 +149,7 @@ internal class RefreshLoginServiceImplTest {
 
     companion object {
         val refreshTokenModel = RefreshTokenModel(
-            userId = "123e4567-e89b-12d3-a456-426614174000",
+            userId = UUID.fromString("123e4567-e89b-12d3-a456-426614174000"),
             token = "sampleToken",
             createdAt = Instant.parse("2023-10-05T00:00:00Z"),
             updatedAt = Instant.parse("2023-10-06T00:00:00Z"),

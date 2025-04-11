@@ -26,7 +26,7 @@ internal class GetUserBeneficiariesServiceImpl(
         )
 
         if (beneficiaries.items.any { beneficiary ->
-                beneficiary.userId != userId.toString()
+                beneficiary.userId != userId
             }
         ) {
             unauthorizedResourceError()

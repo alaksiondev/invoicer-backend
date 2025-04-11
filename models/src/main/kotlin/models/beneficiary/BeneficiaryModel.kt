@@ -12,7 +12,8 @@ data class BeneficiaryModel(
     val swift: String,
     val bankName: String,
     val bankAddress: String,
-    val userId: String,
+    @Serializable(with = JavaUUIDSerializer::class)
+    val userId: UUID,
     @Serializable(with = JavaUUIDSerializer::class)
     val id: UUID,
     val createdAt: Instant,

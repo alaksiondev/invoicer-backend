@@ -1,16 +1,17 @@
 package services.impl.intermediary
 
-import utils.exceptions.http.HttpCode
+import io.github.alaksion.invoicer.utils.fakes.FakeIbanValidator
+import io.github.alaksion.invoicer.utils.fakes.FakeSwiftValidator
 import kotlinx.coroutines.test.runTest
 import models.fixtures.intermediaryModelFixture
 import models.intermediary.UpdateIntermediaryModel
 import repository.api.fakes.FakeIntermediaryRepository
-import io.github.alaksion.invoicer.utils.fakes.FakeIbanValidator
-import io.github.alaksion.invoicer.utils.fakes.FakeSwiftValidator
 import services.fakes.intermediary.FakeCheckIntermediarySwiftAvailableService
 import services.fakes.intermediary.FakeGetIntermediaryByIdService
 import services.fakes.user.FakeGetUserByIdService
+import utils.exceptions.http.HttpCode
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -222,8 +223,8 @@ class UpdateIntermediaryServiceImplTest {
             bankAddress = "Bank Address"
         )
 
-        val BENEFICIARY_ID = "aae887c0-732e-42d8-ac79-0d1953a7d3ec"
-        val USER_ID = "56de1427-e841-47f5-a14d-d0b9503b5a29"
+        val BENEFICIARY_ID = UUID.fromString("aae887c0-732e-42d8-ac79-0d1953a7d3ec")
+        val USER_ID = UUID.fromString("56de1427-e841-47f5-a14d-d0b9503b5a29")
     }
 
 }

@@ -42,8 +42,8 @@ class DeleteBeneficiaryImplTest {
         invoiceRepository.getInvoicesByBeneficiaryIdResponse = { listOf() }
 
         service.execute(
-            beneficiaryId = "988b016b-41a9-487f-b280-283faff1d1d1",
-            userId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"
+            beneficiaryId = UUID.fromString("988b016b-41a9-487f-b280-283faff1d1d1"),
+            userId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36")
         )
 
         assertEquals(
@@ -72,8 +72,8 @@ class DeleteBeneficiaryImplTest {
             }
 
             service.execute(
-                beneficiaryId = "988b016b-41a9-487f-b280-283faff1d1d1",
-                userId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"
+                beneficiaryId = UUID.fromString("988b016b-41a9-487f-b280-283faff1d1d1"),
+                userId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36")
             )
         }
 

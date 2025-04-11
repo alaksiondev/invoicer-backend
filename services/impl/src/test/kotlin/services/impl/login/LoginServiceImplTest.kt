@@ -108,7 +108,7 @@ class LoginServiceImplTest {
             storeRefreshTokenService.callHistory.contains(
                 Pair(
                     "9876",
-                    FakeGetUserByEmailService.DEFAULT_RESPONSE.id.toString()
+                    FakeGetUserByEmailService.DEFAULT_RESPONSE.id
                 )
             )
         }

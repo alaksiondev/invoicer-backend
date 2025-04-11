@@ -10,7 +10,7 @@ class FakeGetUserByIdService : GetUserByIdService {
 
     var response: suspend () -> UserModel = { DEFAULT_RESPONSE }
 
-    override suspend fun get(id: String): UserModel {
+    override suspend fun get(id: UUID): UserModel {
         return response()
     }
 

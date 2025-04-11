@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.ktor)
     alias(libs.plugins.serialization)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.kover)
 }
 
 group = "io.github.alaksion.invoicer.controller"

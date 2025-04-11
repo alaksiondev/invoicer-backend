@@ -8,6 +8,7 @@ import models.beneficiary.UserBeneficiaries
 import repository.api.fakes.FakeBeneficiaryRepository
 import services.fakes.user.FakeGetUserByIdService
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -41,8 +42,8 @@ class GetUserBeneficiariesServiceImplTest {
                             swift = "Swift,",
                             bankName = "bank name",
                             bankAddress = "bank address",
-                            userId = "6da1cca3-6784-4f75-8af8-36390b67a5e0",
-                            id = "d593ba02-c2bb-4be8-bd97-e71c02d229d3",
+                            userId = UUID.fromString("6da1cca3-6784-4f75-8af8-36390b67a5e0"),
+                            id = UUID.fromString("d593ba02-c2bb-4be8-bd97-e71c02d229d3"),
                             createdAt = Instant.parse("2000-06-19T00:00:00Z"),
                             updatedAt = Instant.parse("2000-06-19T00:00:00Z"),
                         )
@@ -53,7 +54,7 @@ class GetUserBeneficiariesServiceImplTest {
             }
 
             service.execute(
-                userId = "7933a470-f38d-4e4e-97b2-230cf9fb60b4",
+                userId = UUID.fromString("7933a470-f38d-4e4e-97b2-230cf9fb60b4"),
                 page = 1,
                 limit = 10
             )
@@ -74,8 +75,8 @@ class GetUserBeneficiariesServiceImplTest {
                 swift = "Swift,",
                 bankName = "bank name",
                 bankAddress = "bank address",
-                userId = "6da1cca3-6784-4f75-8af8-36390b67a5e0",
-                id = "d593ba02-c2bb-4be8-bd97-e71c02d229d3",
+                userId = UUID.fromString("6da1cca3-6784-4f75-8af8-36390b67a5e0"),
+                id = UUID.fromString("d593ba02-c2bb-4be8-bd97-e71c02d229d3"),
                 createdAt = Instant.parse("2000-06-19T00:00:00Z"),
                 updatedAt = Instant.parse("2000-06-19T00:00:00Z"),
             )
@@ -84,7 +85,7 @@ class GetUserBeneficiariesServiceImplTest {
         beneficiaryRepository.getAllResponse = { UserBeneficiaries(items = list, nextPage = null, itemCount = 10) }
 
         val response = service.execute(
-            userId = "6da1cca3-6784-4f75-8af8-36390b67a5e0",
+            userId = UUID.fromString("6da1cca3-6784-4f75-8af8-36390b67a5e0"),
             page = 1,
             limit = 10
         )

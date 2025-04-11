@@ -17,10 +17,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("require-cover-plugin") {
-            id = "requireKover"
-            implementationClass = "buildlogic.plugins.RequireKoverPlugin"
-        }
         create("invoicer-detekt") {
             id = "invoicer.detekt"
             implementationClass = "buildlogic.plugins.InvoicerDetektPlugin"

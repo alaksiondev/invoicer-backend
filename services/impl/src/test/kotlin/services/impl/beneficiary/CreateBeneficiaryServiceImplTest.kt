@@ -10,6 +10,7 @@ import repository.api.fakes.FakeUserRepository
 import services.fakes.beneficiary.FakeCheckBeneficiarySwiftAvailableService
 import services.fakes.user.FakeGetUserByIdService
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -160,7 +161,7 @@ class CreateBeneficiaryServiceImplTest {
     }
 
     companion object {
-        val userId = "7956749e-9d8b-4ab7-abd1-29f0b7ecb9b8"
+        val userId = UUID.fromString("7956749e-9d8b-4ab7-abd1-29f0b7ecb9b8")
 
         val INPUT = CreateBeneficiaryModel(
             name = "Sample name",

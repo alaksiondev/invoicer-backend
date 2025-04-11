@@ -1,3 +1,5 @@
+package io.github.alaksion.invoicer.server.app.database
+
 import foundation.secrets.SecretKeys
 import foundation.secrets.SecretsProvider
 import io.ktor.server.application.*

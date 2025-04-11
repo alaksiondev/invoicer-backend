@@ -35,7 +35,7 @@ class FakeInvoiceRepository : InvoiceRepository {
         filters: GetInvoicesFilterModel,
         page: Long,
         limit: Int,
-        userId: String
+        userId: UUID
     ): InvoiceListModel {
         return getInvoicesResponse()
     }

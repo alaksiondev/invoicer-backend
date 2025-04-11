@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 import models.fixtures.intermediaryModelFixture
 import repository.api.fakes.FakeIntermediaryRepository
 import utils.exceptions.http.HttpError
+import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -29,8 +30,8 @@ class GetIntermediaryByIdServiceImplTest {
             repository.getByIdResponse = { null }
 
             service.get(
-                intermediaryId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36",
-                userId = "8bd22165-975f-4a99-9f89-9447e57d45ad"
+                intermediaryId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"),
+                userId = UUID.fromString("8bd22165-975f-4a99-9f89-9447e57d45ad")
             )
         }
 
@@ -45,13 +46,13 @@ class GetIntermediaryByIdServiceImplTest {
         val error = assertFailsWith<HttpError> {
             repository.getByIdResponse = {
                 intermediaryModelFixture.copy(
-                    userId = "cf6870a5-ae78-44bc-a360-211a30c2c264"
+                    userId = UUID.fromString("cf6870a5-ae78-44bc-a360-211a30c2c264")
                 )
             }
 
             service.get(
-                intermediaryId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36",
-                userId = "8bd22165-975f-4a99-9f89-9447e57d45ad"
+                intermediaryId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"),
+                userId = UUID.fromString("8bd22165-975f-4a99-9f89-9447e57d45ad")
             )
         }
 
@@ -64,14 +65,14 @@ class GetIntermediaryByIdServiceImplTest {
     @Test
     fun `when beneficiaryId owner matches userId parameter then should return beneficiary`() = runTest {
         val beneficiary = intermediaryModelFixture.copy(
-            userId = "8bd22165-975f-4a99-9f89-9447e57d45ad"
+            userId = UUID.fromString("8bd22165-975f-4a99-9f89-9447e57d45ad")
         )
 
         repository.getByIdResponse = { beneficiary }
 
         val response = service.get(
-            intermediaryId = "b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36",
-            userId = "8bd22165-975f-4a99-9f89-9447e57d45ad"
+            intermediaryId = UUID.fromString("b0a7e0bc-044a-42d1-9cc9-f0b63f7f3f36"),
+            userId = UUID.fromString("8bd22165-975f-4a99-9f89-9447e57d45ad")
         )
 
         assertEquals(
